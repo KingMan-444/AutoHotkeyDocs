@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../static/theme.css" rel="stylesheet" type="text/css" />
+<link href="../static/dark.css" rel="stylesheet" type="text/css" media="(prefers-color-scheme: dark)" id="dark_css" />
 <script src="../static/content.js" type="text/javascript"></script>
 <style type="text/css">
 .larger {font-size:130%;font-weight:normal}
@@ -152,11 +153,11 @@
   </tr>
   <tr>
     <td><a href="ControlClick.htm">ControlClick</a></td>
-    <td>Sends a mouse button or mouse wheel event to a control.</td>
+    <td>Sends a mouse button or mouse wheel event to a window or control.</td>
   </tr>
   <tr>
     <td><a href="ControlFocus.htm">ControlFocus</a></td>
-    <td>Sets input focus to a given control on a window.</td>
+    <td>Sets keyboard focus to a control.</td>
   </tr>
   <tr>
     <td><a href="ControlGet.htm">ControlGet</a></td>
@@ -164,7 +165,7 @@
   </tr>
   <tr>
     <td><a href="ControlGetFocus.htm">ControlGetFocus</a></td>
-    <td>Retrieves which control of the target window has input focus, if any.</td>
+    <td>Retrieves which control of the target window has keyboard focus, if any.</td>
   </tr>
   <tr>
     <td><a href="ControlGetPos.htm">ControlGetPos</a></td>
@@ -176,7 +177,7 @@
   </tr>
   <tr>
     <td><a href="ControlMove.htm">ControlMove</a></td>
-    <td>Moves or resizes a control.</td>
+    <td>Moves and/or resizes a control.</td>
   </tr>
   <tr>
     <td><a href="ControlSend.htm">ControlSend / ControlSendRaw</a></td>
@@ -851,8 +852,11 @@
     <td>The means by which the bar of a <a href="GuiControls.htm#StatusBar">StatusBar</a> control is modified.</td>
   </tr>
   <tr>
-    <td class="larger"><a href="Send.htm">Send</a> / <a href="Send.htm#SendRaw">SendRaw</a> / <a href="Send.htm#SendInput">SendInput</a> / <a href="Send.htm#SendPlay">SendPlay</a> / <a href="Send.htm#SendEvent">SendEvent</a></td>
-    <td>Sends simulated keystrokes and mouse clicks to the <a href="WinActivate.htm">active</a> window.</td>
+    <td class="larger"><a href="Send.htm">Send</a></td>
+    <td rowspan="2">Sends simulated keystrokes and mouse clicks to the <a href="WinActivate.htm">active</a> window.</td>
+  </tr>
+  <tr>
+    <td><a href="Send.htm">SendEvent<br>SendInput<br>SendPlay<br>SendRaw</a></td>
   </tr>
   <tr>
     <td><a href="SendLevel.htm">SendLevel</a></td>
@@ -864,7 +868,7 @@
   </tr>
   <tr>
     <td class="larger"><a href="SendMode.htm">SendMode</a></td>
-    <td>Makes <a href="Send.htm">Send</a> synonymous with SendInput or SendPlay rather than the default (SendEvent). Also makes Click and MouseMove/Click/Drag use the specified method.</td>
+    <td>Makes <a href="Send.htm">Send</a> synonymous with SendInput or SendPlay rather than the default (SendEvent). Also makes <a href="Click.htm">Click</a>, <a href="MouseClick.htm">MouseClick</a>, <a href="MouseClickDrag.htm">MouseClickDrag</a>, and <a href="MouseMove.htm">MouseMove</a> use the specified mode.</td>
   </tr>
   <tr>
     <td><a href="SetBatchLines.htm">SetBatchLines</a></td>
@@ -872,7 +876,7 @@
   </tr>
   <tr>
     <td><a href="SetNumScrollCapsLockState.htm">SetCapsLockState</a></td>
-    <td>Sets the state of <kbd>CapsLock</kbd>. Can also force the key to stay on or off.</td>
+    <td>Sets the state of the CapsLock key. Can also force the key to stay on or off.</td>
   </tr>
   <tr>
     <td><a href="SetControlDelay.htm">SetControlDelay</a></td>
@@ -900,11 +904,11 @@
   </tr>
   <tr>
     <td><a href="SetNumScrollCapsLockState.htm">SetNumLockState</a></td>
-    <td>Sets the state of <kbd>NumLock</kbd>. Can also force the key to stay on or off.</td>
+    <td>Sets the state of the NumLock key. Can also force the key to stay on or off.</td>
   </tr>
   <tr>
     <td><a href="SetNumScrollCapsLockState.htm">SetScrollLockState</a></td>
-    <td>Sets the state of <kbd>ScrollLock</kbd>. Can also force the key to stay on or off.</td>
+    <td>Sets the state of the ScrollLock key. Can also force the key to stay on or off.</td>
   </tr>
   <tr>
     <td><a href="SetRegView.htm">SetRegView</a></td>
@@ -912,7 +916,7 @@
   </tr>
   <tr>
     <td><a href="SetStoreCapsLockMode.htm">SetStoreCapsLockMode</a></td>
-    <td>Whether to restore the state of <kbd>CapsLock</kbd> after a <a href="Send.htm">Send</a>.</td>
+    <td>Whether to restore the state of the CapsLock key after sending simulated keystrokes.</td>
   </tr>
   <tr>
     <td class="larger"><a href="SetTimer.htm">SetTimer</a></td>
@@ -1187,7 +1191,7 @@
   </tr>
   <tr>
     <td><a href="WinGet.htm">WinGet</a></td>
-    <td>Retrieves the specified window's unique ID, process ID, process name, or a list of its controls. It can also retrieve a list of all windows matching the specified criteria.</td>
+    <td>Retrieves the specified window's unique ID (HWND), process ID, process name, or a list of its controls. It can also retrieve a list of all windows matching the specified criteria.</td>
   </tr>
   <tr>
     <td><a href="WinGetPos.htm">WinGetPos</a></td>
@@ -1295,7 +1299,7 @@
   </tr>
   <tr>
     <td class="larger"><a href="_If.htm">#If</a></td>
-    <td>Creates context-sensitive <a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a>. Such hotkeys perform a different action (or none at all) depending on the result of an expression.</td>
+    <td>Creates context-sensitive <a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a>. They perform a different action (or none at all) depending on the result of an expression.</td>
   </tr>
   <tr>
     <td><a href="_IfTimeout.htm">#IfTimeout</a></td>
@@ -1303,7 +1307,7 @@
   </tr>
   <tr>
     <td class="larger"><a href="_IfWinActive.htm">#IfWinActive / #IfWinNotActive / #IfWinExist / #IfWinNotExist</a></td>
-    <td>Creates context-sensitive <a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a>. Such hotkeys perform a different action (or none at all) depending on the type of window that is active or exists.</td>
+    <td>Creates context-sensitive <a href="../Hotkeys.htm">hotkeys</a> and <a href="../Hotstrings.htm">hotstrings</a>. They perform a different action (or none at all) depending on the type of window that is active or exists.</td>
   </tr>
   <tr>
     <td><a href="_Include.htm">#Include / #IncludeAgain</a></td>

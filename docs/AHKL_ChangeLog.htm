@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="static/theme.css" rel="stylesheet" type="text/css" />
+<link href="static/dark.css" rel="stylesheet" type="text/css" media="(prefers-color-scheme: dark)" id="dark_css" />
 <script src="static/content.js" type="text/javascript"></script>
 </head>
 
@@ -1114,7 +1115,7 @@
 <h2 id="v1.1.07.00">1.1.07.00 - February 27, 2012</h2>
 <p>Enhanced <code><a href="Functions.htm#DynCall">%var%()</a></code> to support <a href="misc/Functor.htm">function objects</a> and the <a href="Objects.htm#Default_Base_Object">default __Call meta-function</a>.</p>
 <p>Fixed <a href="lib/ControlGet.htm#List">ControlGet List</a> to work for ListViews where the script and the target process aren't both 32-bit or both 64-bit.</p>
-<p>Fixed <a href="lib/Send.htm#SendEvent">SendEvent</a> with a key delay of 0; a change introduced by v1.1.05.04 caused it to be slower than intended.</p>
+<p>Fixed <a href="lib/SendMode.htm#Event">SendEvent</a> with a key delay of 0; a change introduced by v1.1.05.04 caused it to be slower than intended.</p>
 <p>Fixed <a href="lib/Object.htm#Remove">Object.Remove(i)</a> not adjusting keys if Object[i] doesn't exist.</p>
 <p>Fixed an error in <a href="lib/ComObjType.htm">ComObjType()</a> which may have caused unpredictable behaviour when it is called via an <a href="lib/ComObjActive.htm#Remarks">alternative name</a>.</p>
 <p>Fixed <a href="lib/ExitApp.htm">ExitApp</a> to exit the thread if an <a href="lib/OnExit.htm#command">OnExit</a> subroutine prevents the script from terminating, instead of resuming execution after the <a href="lib/Block.htm">block</a> which contained ExitApp.</p>
@@ -1219,7 +1220,7 @@
 <p>Added <a href="lib/Gui.htm#GuiHwndOutputVar">Gui +HwndVARNAME</a> option.</p>
 <p>Added <a href="lib/Gui.htm#New">Gui, New [, Options, Title]</a>.</p>
 <p>Added automatic support for keyboard accelerators such as Ctrl+O in <a href="lib/Gui.htm#Menu">Gui menus</a>.</p>
-<p>Changed handling of <code>#Include &lt;Lib&gt;</code> when the /iLib command-line switch is present to resolve a <a href="https://github.com/fincs/Ahk2Exe/issues/4">problem</a> with Ahk2Exe.</p>
+<p>Changed handling of <code>#Include &lt;Lib&gt;</code> when the /iLib command-line switch is present to resolve a <a href="https://github.com/AutoHotkey/Ahk2Exe/issues/4">problem</a> with Ahk2Exe.</p>
 <p>Changed GuiControl to retain the Progress control's current value when its style is changed.</p>
 <p>Changed GuiControl and GuiControlGet to allow a HWND to be passed in the <em>ControlID</em> parameter.</p>
 <p>Removed the 1GB limit from FileRead.</p>

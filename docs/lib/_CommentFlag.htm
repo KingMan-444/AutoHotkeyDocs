@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../static/theme.css" rel="stylesheet" type="text/css" />
+<link href="../static/dark.css" rel="stylesheet" type="text/css" media="(prefers-color-scheme: dark)" id="dark_css" />
 <script src="../static/content.js" type="text/javascript"></script>
 </head>
 <body>
@@ -30,6 +31,7 @@
 <p>A comment flag that appears on the same line as a command is not considered to mark a comment unless it has at least one space or tab to its left. For example:</p>
 <pre>MsgBox, Test1 <em>; This is a comment.</em>
 MsgBox, Test2; This is not a comment and will be displayed by MsgBox.</pre>
+<p>The #CommentFlag directive is positional: it affects all comments physically beneath it.</p>
 <p>Like other directives, #CommentFlag cannot be executed conditionally.</p>
 <h2 id="Related">Related</h2>
 <p><a href="_EscapeChar.htm">#EscapeChar</a></p>

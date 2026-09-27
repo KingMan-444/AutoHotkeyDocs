@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>WinTitle &amp; Last Found Window | AutoHotkey v1</title>
+<title>WinTitle Parameter &amp; Last Found Window | AutoHotkey v1</title>
 <meta name="description" content="This page lists criteria that can be used in the WinTitle parameter of commands, functions, etc. to determine the target window(s)." />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link href="../static/theme.css" rel="stylesheet" type="text/css" />
+<link href="../static/theme.css" rel="stylesheet" type="text/css" />
+<link href="../static/dark.css" rel="stylesheet" type="text/css" media="(prefers-color-scheme: dark)" id="dark_css" />
 <script src="../static/content.js" type="text/javascript"></script>
 </head>
 <body>
 
-<h1><var>WinTitle</var> Parameter &amp; Last Found Window</h1>
+<h1>WinTitle Parameter &amp; Last Found Window</h1>
 <p>Various commands, functions, directives, and control flow statements have a <var>WinTitle</var> parameter, used to identify which window (or windows) to operate on. This parameter can be the title or partial title of the window, and/or any other criteria described on this page.</p>
 
 <h2 id="toc">Table of Contents</h2>
@@ -28,11 +29,12 @@
   </li>
   <li><a href="#multi">Multiple Criteria</a></li>
   <li><a href="#LastFoundWindow">Last Found Window</a></li>
+  <li><a href="#Related">Related</a></li>
 </ul>
 
 <a id="Matching"></a>
 <h2 id="WinTitle">Window Title &amp; Matching Behaviour</h2>
-<p>Specify any string for <var>WinTitle</var> to identify a window by its title. The title of a window is often visible as text in a title bar at the top of the window. If invisible or only partially visible, the full window title can be revealed via <a href="../lib/WinGetTitle.htm">WinGetTitle</a> or Window Spy.</p>
+<p>Specify any string for <var>WinTitle</var> to identify a window by its title. The title of a window is often visible as text in a title bar at the top of the window. If invisible or only partially visible, the full window title can be revealed via <a href="../lib/WinGetTitle.htm">WinGetTitle</a> or <a href="../Program.htm#Window_Spy">Window Spy</a>.</p>
 <p>The following example activates the calculator:</p>
 <pre>WinActivate, Calculator</pre>
 <p><a href="../lib/SetTitleMatchMode.htm">SetTitleMatchMode</a> controls how a partial or complete title is compared against the title of each window. Depending on the setting, <var>WinTitle</var> can be an exact title, or it can contain a prefix, a substring which occurs anywhere in the title, or a <a href="RegEx-QuickRef.htm">RegEx pattern</a>. This setting also controls whether the <a href="#ahk_class">ahk_class</a> and <a href="#ahk_exe">ahk_exe</a> criteria are interpreted as RegEx patterns.</p>
@@ -54,7 +56,7 @@
 
 <h3 id="ahk_class">ahk_class (Window Class)</h3>
 <p>Use <code class="no-highlight">ahk_class <var>ClassName</var></code> in <var>WinTitle</var> to identify a window by its window class. Only the first 1023 characters of <var>ClassName</var> are considered for matching purposes.</p>
-<p>A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what <em>type</em> of window it is. A window class can be revealed via Window Spy or retrieved by <a href="../lib/WinGetClass.htm">WinGetClass</a>. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ClassName</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a>.</p>
+<p>A window class is a set of attributes that the system uses as a template to create a window. In other words, the class name of the window identifies what <em>type</em> of window it is. A window class can be revealed via <a href="../Program.htm#Window_Spy">Window Spy</a> or retrieved by <a href="../lib/WinGetClass.htm">WinGetClass</a>. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ClassName</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a>.</p>
 <p>The following example activates a console window (e.g. cmd.exe):</p>
 <pre>WinActivate, ahk_class ConsoleWindowClass</pre>
 <p>The following example does the same as above, but uses a <a href="RegEx-QuickRef.htm">regular expression</a> (note that the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> must be turned on beforehand to make it work):</p>
@@ -62,18 +64,20 @@
 
 <h3 id="ahk_id">ahk_id (Unique ID / HWND)</h3>
 <p>Use <code class="no-highlight">ahk_id <var>HWND</var></code> in <var>WinTitle</var> to identify a window or control by its unique ID.</p>
-<p>Each window or control has a unique ID, also known as a HWND (short for handle to window). This ID can be used to identify the window or control even if its title or text changes. The ID of a window is typically retrieved via <a href="../lib/WinExist.htm">WinExist()</a> or <a href="../lib/WinGet.htm">WinGet</a>. The ID of a control is typically retrieved via <a href="../lib/ControlGet.htm#Hwnd">ControlGet Hwnd</a>, <a href="../lib/MouseGetPos.htm">MouseGetPos</a>, or <a href="../lib/DllCall.htm">DllCall()</a>. Also, the ahk_id criterion will operate on controls even if they are hidden; that is, the setting of <a href="../lib/DetectHiddenWindows.htm">DetectHiddenWindows</a> does not matter for controls.</p>
+<p>Each window and control has a unique ID, also known as a HWND (short for handle to window). This ID can be used to identify the window or control even if its title or text changes. The ID of a window is typically retrieved via <a href="../lib/WinExist.htm">WinExist()</a> or <a href="../lib/WinGet.htm">WinGet</a>. For details about identifying a control by HWND, see <a href="ControlID.htm#HWND">Control Identifiers</a>.</p>
+<p>A HWND is especially useful when sending messages directly to a window or control via <a href="../lib/PostMessage.htm">PostMessage</a>, <a href="../lib/PostMessage.htm">SendMessage</a>, or when calling native APIs with <a href="../lib/DllCall.htm">DllCall()</a>.</p>
+
 <p>The following example activates a window by a unique ID stored in <var>VarContainingID</var>:</p>
 <pre>WinActivate, ahk_id %VarContainingID%</pre>
 
 <h3 id="ahk_pid">ahk_pid (Process ID)</h3>
-<p>Use <code class="no-highlight">ahk_pid <var>PID</var></code> in <var>WinTitle</var> to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by <a href="../lib/WinGet.htm">WinGet</a>, <a href="../lib/Run.htm">Run</a> or <a href="../lib/Process.htm">Process</a>. The ID of a window's process can be revealed via Window Spy.</p>
+<p>Use <code class="no-highlight">ahk_pid <var>PID</var></code> in <var>WinTitle</var> to identify a window belonging to a specific process. The process identifier (PID) is typically retrieved by <a href="../lib/WinGet.htm">WinGet</a>, <a href="../lib/Run.htm">Run</a> or <a href="../lib/Process.htm">Process</a>. The ID of a window's process can be revealed via <a href="../Program.htm#Window_Spy">Window Spy</a>.</p>
 <p>The following example activates a window by a process ID stored in <var>VarContainingPID</var>:</p>
 <pre>WinActivate, ahk_pid %VarContainingPID%</pre>
 
 <h3 id="ahk_exe">ahk_exe (Process Name/Path) <span class="ver">[v1.1.01+]</span></h3>
 <p>Use <code class="no-highlight">ahk_exe <var>ProcessNameOrPath</var></code> in <var>WinTitle</var> to identify a window belonging to any process with the given name or path. Only the first 1023 characters of <var>ProcessNameOrPath</var> are considered for matching purposes.</p>
-<p>While the <a href="#ahk_pid">ahk_pid criterion</a> is limited to one specific process, the ahk_exe criterion considers all processes with name or full path matching a given string. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ProcessNameOrPath</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a> which must match the full path of the process. Otherwise, it accepts a case-insensitive name or full path; for example, <code class="no-highlight">ahk_exe notepad.exe</code> covers <code class="no-highlight">ahk_exe C:\Windows\Notepad.exe</code>, <code class="no-highlight">ahk_exe C:\Windows\System32\Notepad.exe</code> and other variations. The name of a window's process can be revealed via Window Spy.</p>
+<p>While the <a href="#ahk_pid">ahk_pid criterion</a> is limited to one specific process, the ahk_exe criterion considers all processes with name or full path matching a given string. If the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> is active, <var>ProcessNameOrPath</var> accepts a <a href="RegEx-QuickRef.htm">regular expression</a> which must match the full path of the process. Otherwise, it accepts a case-insensitive name or full path; for example, <code class="no-highlight">ahk_exe notepad.exe</code> covers <code class="no-highlight">ahk_exe C:\Windows\Notepad.exe</code>, <code class="no-highlight">ahk_exe C:\Windows\System32\Notepad.exe</code> and other variations. The name of a window's process can be revealed via <a href="../Program.htm#Window_Spy">Window Spy</a>.</p>
 <p>The following example activates a Notepad window by its process name:</p>
 <pre>WinActivate, ahk_exe notepad.exe</pre>
 <p>The following example does the same as above, but uses a <a href="RegEx-QuickRef.htm">regular expression</a> (note that the RegEx <a href="../lib/SetTitleMatchMode.htm">title matching mode</a> must be turned on beforehand to make it work):</p>
@@ -132,6 +136,9 @@ else
     WinActivate <em>; Use the window found by WinExist.</em>
     WinMove, 40, 40 <em>; Same as above.</em>
 }</pre>
+
+<h2 id="Related">Related</h2>
+<p><a href="ControlID.htm">ControlID Parameter (Window Control Identifiers)</a></p>
 
 </body>
 </html>

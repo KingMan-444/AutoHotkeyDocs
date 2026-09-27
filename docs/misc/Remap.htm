@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../static/theme.css" rel="stylesheet" type="text/css" />
+<link href="../static/dark.css" rel="stylesheet" type="text/css" media="(prefers-color-scheme: dark)" id="dark_css" />
 <script src="../static/content.js" type="text/javascript"></script>
 </head>
 <body>
@@ -94,7 +95,7 @@ b::a</pre>
 <p>You can try out any of these examples by copying them into a new text file such as "Remap.ahk", then launching the file.</p>
 <p>See the <a href="../KeyList.htm">Key List</a> for a complete list of key and mouse button names.</p>
 <h2 id="remarks">Remarks</h2>
-<p>The directives <a href="../lib/_IfWinActive.htm">#IfWinActive/Exist</a> can be used to make selected remappings active only in the windows you specify. For example:</p>
+<p>The directives <a href="../lib/_IfWinActive.htm">#IfWinActive/Exist</a> and <a href="../lib/_If.htm">#If</a> can be used to make selected remappings active only in the windows you specify. For example:</p>
 <pre>#IfWinActive ahk_class Notepad
 a::b  <em>; Makes the 'a' key send a 'b' key, but only in Notepad.</em>
 #IfWinActive  <em>; This puts subsequent remappings and hotkeys in effect for all windows.</em></pre>
@@ -119,7 +120,7 @@ a::b
 ^!b::
 ToolTip You pressed %A_ThisHotkey%.
 return</pre>
-<p id="SendPlay">If <a href="../lib/SendMode.htm">SendMode</a> is used in the <a href="../Scripts.htm#auto">auto-execute section</a> (top part of the script), it affects all remappings. However, since remapping uses <a href="../lib/Send.htm#blind">Send {Blind}</a> and since the <a href="../lib/SendMode.htm">SendPlay mode</a> does not fully support  {Blind}, some remappings might not function properly in SendPlay mode (especially <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, <kbd>Alt</kbd>, and <kbd>Win</kbd>). To work around this, avoid SendPlay in auto-execute section when you have remappings; then use the command <a href="../lib/Send.htm#SendPlay">SendPlay</a> vs. Send in other places throughout the script. Alternatively, you could translate your remappings into hotkeys (as described below) that explicitly call SendEvent vs. Send.</p>
+<p id="SendPlay">If <a href="../lib/SendMode.htm">SendMode</a> is used in the <a href="../Scripts.htm#auto">auto-execute section</a> (top part of the script), it affects all remappings. However, since remapping uses <a href="../lib/Send.htm#blind">Send {Blind}</a> and since the <a href="../lib/SendMode.htm#Play">SendPlay mode</a> does not fully support  {Blind}, some remappings might not function properly in SendPlay mode (especially <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, <kbd>Alt</kbd>, and <kbd>Win</kbd>). To work around this, avoid SendPlay in auto-execute section when you have remappings; then use the command <a href="../lib/Send.htm">SendPlay</a> vs. Send in other places throughout the script. Alternatively, you could translate your remappings into hotkeys (as described below) that explicitly call SendEvent vs. Send.</p>
 <p id="actually">When a script is launched, each remapping is translated into a pair of <a href="../Hotkeys.htm">hotkeys</a>. For example, a script containing <code>a::b</code> actually contains the following two hotkeys instead:</p>
 <pre>*a::
 SetKeyDelay -1   <em>; If the destination key is a mouse button, SetMouseDelay is used instead.</em>

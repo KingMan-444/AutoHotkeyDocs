@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../static/theme.css" rel="stylesheet" type="text/css" />
+<link href="../static/dark.css" rel="stylesheet" type="text/css" media="(prefers-color-scheme: dark)" id="dark_css" />
 <script src="../static/content.js" type="text/javascript"></script>
 </head>
 <body>
@@ -14,7 +15,7 @@
 
 <p>Retrieves the position and size of a control.</p>
 
-<pre class="Syntax"><span class="func">ControlGetPos</span> <span class="optional">, OutX, OutY, OutWidth, OutHeight, Control, WinTitle, WinText, ExcludeTitle, ExcludeText</span></pre>
+<pre class="Syntax"><span class="func">ControlGetPos</span> <span class="optional">, OutX, OutY, OutWidth, OutHeight, ControlID, WinTitle, WinText, ExcludeTitle, ExcludeText</span></pre>
 <h2 id="Parameters">Parameters</h2>
 <dl>
 
@@ -24,13 +25,14 @@
   <dt>OutWidth, OutHeight</dt>
   <dd><p>If omitted, the corresponding value will not be stored. Otherwise, specify the names of the output variables in which to store the control's width and height (in pixels).</p></dd>
 
-  <dt>Control</dt>
-  <dd><p>If blank or omitted, the target window's topmost control will be used. Otherwise, specify either ClassNN (the classname and instance number of the control) or the control's text, both of which can be determined via Window Spy. When using text, the matching behavior is determined by <a href="SetTitleMatchMode.htm">SetTitleMatchMode</a>.</p>
-    <p>To operate upon a control's HWND (window handle), leave the <em>Control</em> parameter blank and specify <code class="no-highlight">ahk_id %ControlHwnd%</code> for the <em>WinTitle</em> parameter (this also works on hidden controls even when <a href="DetectHiddenWindows.htm">DetectHiddenWindows</a> is Off). The HWND of a control is typically retrieved via <a href="ControlGet.htm#Hwnd">ControlGet Hwnd</a>, <a href="MouseGetPos.htm">MouseGetPos</a>, or <a href="DllCall.htm">DllCall()</a>.</p></dd>
+  <dt>ControlID</dt>
+  <dd>
+    <p>If blank or omitted, the target window's topmost control will be used. Otherwise, specify the control's ClassNN or text, or leave it blank and specify <code class="no-highlight">ahk_id %ControlHwnd%</code> for the <em>WinTitle</em> parameter to operate upon the control's HWND. For details, see <a href="../misc/ControlID.htm">Control Identifiers</a>.</p>
+  </dd>
 
   <dt>WinTitle, WinText, ExcludeTitle, ExcludeText</dt>
   <dd>
-    <p>If each of these is blank or omitted, the <a href="../misc/WinTitle.htm#LastFoundWindow">Last Found Window</a> will be used. Otherwise, specify for <em>WinTitle</em> a <a href="../misc/WinTitle.htm">window title or other criteria</a> to identify the target window and/or for <em>WinText</em> a substring from a single text element of the target window (as revealed by the included Window Spy utility).</p>
+    <p>If each of these is blank or omitted, the <a href="../misc/WinTitle.htm#LastFoundWindow">Last Found Window</a> will be used. Otherwise, specify for <em>WinTitle</em> a <a href="../misc/WinTitle.htm">window title or other criteria</a> to identify the target window and/or for <em>WinText</em> a substring from a single text element of the target window (as revealed by the included <a href="../Program.htm#Window_Spy">Window Spy</a> utility).</p>
     <p><em>ExcludeTitle</em> and <em>ExcludeText</em> can be used to exclude one or more windows by their title or text. Their specification is similar to <em>WinTitle</em> and <em>WinText</em>, except that <em>ExcludeTitle</em> does not recognize any criteria other than the window title.</p>
     <p>Window titles and text are case-sensitive. By default, hidden windows are not detected and hidden text elements are detected, unless changed with <a href="DetectHiddenWindows.htm">DetectHiddenWindows</a> and <a href="DetectHiddenText.htm">DetectHiddenText</a>. By default, a window title must start with the specified <em>WinTitle</em> or <em>ExcludeTitle</em> to be a match, unless changed with <a href="SetTitleMatchMode.htm">SetTitleMatchMode</a>.</p>
   </dd>
@@ -38,12 +40,14 @@
 </dl>
 
 <h2 id="Remarks">Remarks</h2>
+<p>This command is intended for use with controls in a non-GUI window, i.e. a window that is not created with the <a href="Gui.htm">Gui</a> command. It works best with common or predefined Microsoft controls; some applications use custom or modified controls, in which case the command might not work as expected. For <a href="GuiControls.htm">GUI controls</a>, it is usually more convenient to use <a href="GuiControlGet.htm#Pos">GuiControlGet Pos</a>.</p>
 <p>If no matching window or control is found, the output variables will be made blank.</p>
 <p>Unlike commands that change a control, ControlGetPos does not have an automatic delay (<a href="SetControlDelay.htm">SetControlDelay</a> does not affect it).</p>
-<p>To discover the ClassNN or HWND of the control that the mouse is currently hovering over, use <a href="MouseGetPos.htm">MouseGetPos</a>. To retrieve a list of all controls in a window, use <a href="WinGet.htm#ControlList">WinGet ControlList</a>.</p>
+<p>To discover the <a href="../misc/ControlID.htm#ClassNN">ClassNN</a> or <a href="../misc/ControlID.htm#HWND">HWND</a> of the control that the mouse is currently hovering over, use <a href="MouseGetPos.htm">MouseGetPos</a>.</p>
+<p>To retrieve a list of all controls in a window, use <a href="WinGet.htm#ControlList">WinGet ControlList</a>.</p>
 
 <h2 id="Related">Related</h2>
-<p><a href="ControlMove.htm">ControlMove</a>, <a href="WinGetPos.htm">WinGetPos</a>, <a href="Control.htm">Control</a>, <a href="ControlGet.htm">ControlGet</a>, <a href="ControlGetText.htm">ControlGetText</a>, <a href="ControlSetText.htm">ControlSetText</a>, <a href="ControlClick.htm">ControlClick</a>, <a href="ControlFocus.htm">ControlFocus</a>, <a href="ControlSend.htm">ControlSend</a></p>
+<p><a href="ControlMove.htm">ControlMove</a>, <a href="WinGetPos.htm">WinGetPos</a>, <a href="GuiControlGet.htm#Pos">GuiControlGet Pos</a>, <a href="Control.htm">Control</a>, <a href="ControlGet.htm">ControlGet</a>, <a href="ControlGetText.htm">ControlGetText</a>, <a href="ControlSetText.htm">ControlSetText</a>, <a href="ControlClick.htm">ControlClick</a>, <a href="ControlFocus.htm">ControlFocus</a>, <a href="ControlSend.htm">ControlSend</a></p>
 <h2 id="Examples">Examples</h2>
 <div class="ex" id="ExBasic">
 <p><a class="ex_number" href="#ExBasic"></a> Continuously updates and displays the name and position of the control currently under the mouse cursor.</p>

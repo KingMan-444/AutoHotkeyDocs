@@ -252,7 +252,7 @@ tocData = [
     ["MouseClickDrag","lib/MouseClickDrag.htm"],
     ["MouseGetPos","lib/MouseGetPos.htm"],
     ["MouseMove","lib/MouseMove.htm"],
-    ["Send[Raw|Input|Play|Event]","lib/Send.htm"],
+    ["Send[Raw|Event|Input|Play]","lib/Send.htm"],
     ["SendLevel","lib/SendLevel.htm"],
     ["SendMode","lib/SendMode.htm"],
     ["SetCapsLockState","lib/SetNumScrollCapsLockState.htm"],
@@ -360,6 +360,7 @@ tocData = [
   [
     ["Controls","",
     [
+      ["Control Identifiers","misc/ControlID.htm"],
       ["Control","lib/Control.htm"],
       ["ControlClick","lib/ControlClick.htm"],
       ["ControlFocus","lib/ControlFocus.htm"],
